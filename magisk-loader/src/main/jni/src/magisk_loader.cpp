@@ -54,7 +54,7 @@ namespace lspd {
                 env, classloader, "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
         auto sys_classloader = JNI_CallStaticObjectMethod(env, classloader, getsyscl_mid);
         if (!sys_classloader) [[unlikely]] {
-            LOGE("getSystemClassLoader failed!!!");
+            //LOGE("getSystemClassLoader failed!!!");
             return;
         }
         auto in_memory_classloader = JNI_FindClass(env, "dalvik/system/InMemoryDexClassLoader");
@@ -66,7 +66,7 @@ namespace lspd {
                                        dex_buffer, sys_classloader)) {
             inject_class_loader_ = JNI_NewGlobalRef(env, my_cl);
         } else {
-            LOGE("InMemoryDexClassLoader creation failed!!!");
+            //LOGE("InMemoryDexClassLoader creation failed!!!");
             return;
         }
 
@@ -98,7 +98,7 @@ namespace lspd {
             auto *instance = Service::instance();
             auto system_server_binder = instance->RequestSystemServerBinder(env);
             if (!system_server_binder) {
-                LOGF("Failed to get system server binder, system server initialization failed.");
+                //LOGF("Failed to get system server binder, system server initialization failed.");
                 return;
             }
 
@@ -138,7 +138,7 @@ namespace lspd {
                             JNI_TRUE, JNI_NewStringUTF(env, "system"), nullptr, application_binder);
                 GetArt(true);
             } else {
-                LOGI("skipped system server");
+                //LOGI("skipped system server");
                 GetArt(true);
             }
         }
@@ -165,12 +165,12 @@ namespace lspd {
         JUTFString process_name(env, nice_name);
         skip_ = false;
         if (!skip_ && !app_data_dir) {
-            LOGD("skip injecting into {} because it has no data dir", process_name.get());
+            //LOGD("skip injecting into {} because it has no data dir", process_name.get());
             skip_ = true;
         }
         if (!skip_ && is_child_zygote) {
             skip_ = true;
-            LOGD("skip injecting into {} because it's a child zygote", process_name.get());
+            //LOGD("skip injecting into {} because it's a child zygote", process_name.get());
         }
 
         if (!skip_ && ((app_id >= FIRST_ISOLATED_UID && app_id <= LAST_ISOLATED_UID) ||
@@ -178,7 +178,7 @@ namespace lspd {
                         app_id <= LAST_APP_ZYGOTE_ISOLATED_UID) ||
                        app_id == SHARED_RELRO_UID)) {
             skip_ = true;
-            LOGI("skip injecting into {} because it's isolated", process_name.get());
+            //LOGI("skip injecting into {} because it's isolated", process_name.get());
         }
         setAllowUnload(skip_);
     }
@@ -213,18 +213,18 @@ namespace lspd {
             InitArtHooker(env, initInfo);
             InitHooks(env);
             SetupEntryClass(env);
-            LOGD("Done prepare");
+            //LOGD("Done prepare");
             FindAndCall(env, "forkCommon",
                         "(ZLjava/lang/String;Ljava/lang/String;Landroid/os/IBinder;)V",
                         JNI_FALSE, nice_name, app_dir, binder);
-            LOGD("injected xposed into {}", process_name.get());
+            //LOGD("injected xposed into {}", process_name.get());
             setAllowUnload(false);
             GetArt(true);
         } else {
             auto context = Context::ReleaseInstance();
             auto service = Service::ReleaseInstance();
             GetArt(true);
-            LOGD("skipped {}", process_name.get());
+            //LOGD("skipped {}", process_name.get());
             setAllowUnload(true);
         }
     }

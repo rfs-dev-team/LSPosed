@@ -46,7 +46,7 @@ import okio.Okio;
 public class UpdateUtil {
     public static void loadRemoteVersion() {
         var request = new Request.Builder()
-                .url("https://api.github.com/repos/LSPosed/LSPosed/releases/latest")
+                .url("https://api.github.com/repos/pumPCin/LSPosed/releases/latest")
                 .addHeader("Accept", "application/vnd.github.v3+json")
                 .build();
         var callback = new Callback() {
@@ -64,13 +64,13 @@ public class UpdateUtil {
                         checkAssets(assets.getAsJsonObject(), notes, api.toLowerCase(Locale.ROOT));
                     }
                 } catch (Throwable t) {
-                    Log.e(App.TAG, t.getMessage(), t);
+                    //Log.e(App.TAG, t.getMessage(), t);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.e(App.TAG, "loadRemoteVersion: " + e.getMessage());
+                //Log.e(App.TAG, "loadRemoteVersion: " + e.getMessage());
                 var pref = App.getPreferences();
                 if (pref.getBoolean("checked", false)) return;
                 pref.edit().putBoolean("checked", true).apply();
@@ -134,7 +134,7 @@ public class UpdateUtil {
                 sink.writeAll(source);
             }
         } catch (IOException e) {
-            Log.e(App.TAG, "downloadNewZipSync: " + e.getMessage());
+            //Log.e(App.TAG, "downloadNewZipSync: " + e.getMessage());
             return null;
         }
         return zip;

@@ -78,7 +78,7 @@ namespace lspd {
             });
         }();
         if (!initialized) [[unlikely]] return;
-        LOGD("native_api: Registered {}", library_name);
+        //LOGD("native_api: Registered {}", library_name);
         moduleNativeLibs.push_back(library_name);
     }
 
@@ -101,18 +101,18 @@ namespace lspd {
                 } else {
                     ns = "NULL";
                 }
-                LOGD("native_api: do_dlopen({})", ns);
+                //LOGD("native_api: do_dlopen({})", ns);
                 if (handle == nullptr) {
                     return nullptr;
                 }
                 for (std::string_view module_lib: moduleNativeLibs) {
                     // the so is a module so
                     if (hasEnding(ns, module_lib)) [[unlikely]] {
-                        LOGD("Loading module native library {}", module_lib);
+                        //LOGD("Loading module native library {}", module_lib);
                         void *native_init_sym = dlsym(handle, "native_init");
                         if (native_init_sym == nullptr) [[unlikely]] {
-                            LOGD("Failed to get symbol \"native_init\" from library {}",
-                                 module_lib);
+                            //LOGD("Failed to get symbol \"native_init\" from library {}",
+                                 //module_lib);
                             break;
                         }
                         auto native_init = reinterpret_cast<NativeInit>(native_init_sym);
@@ -135,7 +135,7 @@ namespace lspd {
     bool InstallNativeAPI(const lsplant::HookHandler & handler) {
         auto *do_dlopen_sym = SandHook::ElfImg("/linker").getSymbAddress(
                 "__dl__Z9do_dlopenPKciPK17android_dlextinfoPKv");
-        LOGD("InstallNativeAPI: {}", do_dlopen_sym);
+        //LOGD("InstallNativeAPI: {}", do_dlopen_sym);
         if (do_dlopen_sym) [[likely]] {
             HookSymNoHandle(handler, do_dlopen_sym, do_dlopen);
             return true;

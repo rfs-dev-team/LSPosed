@@ -38,7 +38,7 @@ public class LogcatService implements Runnable {
         @Override
         synchronized protected boolean removeEldestEntry(Entry<File, Object> eldest) {
             if (size() > MAX_ENTRIES && eldest.getKey().delete()) {
-                Log.d(TAG, "Deleted old log " + eldest.getKey().getAbsolutePath());
+                //Log.d(TAG, "Deleted old log " + eldest.getKey().getAbsolutePath());
                 return true;
             }
             return false;
@@ -76,7 +76,7 @@ public class LogcatService implements Runnable {
                     .redirectOutput(ConfigFileManager.getPropsPath())
                     .start();
         } catch (IOException e) {
-            Log.e(TAG, "getprop: ", e);
+            //Log.e(TAG, "getprop: ", e);
         } finally {
             SELinux.setFSCreateContext(null);
         }
@@ -88,7 +88,7 @@ public class LogcatService implements Runnable {
                     .redirectOutput(ConfigFileManager.getKmsgPath())
                     .start();
         } catch (IOException e) {
-            Log.e(TAG, "dmesg: ", e);
+            //Log.e(TAG, "dmesg: ", e);
         }
     }
 
@@ -96,9 +96,9 @@ public class LogcatService implements Runnable {
 
     @Override
     public void run() {
-        Log.i(TAG, "start running");
+        //Log.i(TAG, "start running");
         runLogcat();
-        Log.i(TAG, "stopped");
+        //Log.i(TAG, "stopped");
     }
 
     @SuppressWarnings("unused")
@@ -112,7 +112,7 @@ public class LogcatService implements Runnable {
                 checkFd(modulesFd);
                 log = ConfigFileManager.getNewModulesLogPath();
             }
-            Log.i(TAG, "New log file: " + log);
+            //Log.i(TAG, "New log file: " + log);
             ConfigFileManager.chattr0(log.toPath().getParent());
             int fd = ParcelFileDescriptor.open(log, mode).detachFd();
             if (isVerboseLog) {
@@ -130,7 +130,7 @@ public class LogcatService implements Runnable {
         } catch (IOException e) {
             if (isVerboseLog) verboseFd = -1;
             else modulesFd = -1;
-            Log.w(TAG, "refreshFd", e);
+            //Log.w(TAG, "refreshFd", e);
             return -1;
         }
     }
@@ -154,7 +154,7 @@ public class LogcatService implements Runnable {
                 Files.copy(file, parent.resolve(originName));
             }
         } catch (Throwable e) {
-            Log.w(TAG, "checkFd " + fd, e);
+            //Log.w(TAG, "checkFd " + fd, e);
         }
     }
 
@@ -167,7 +167,7 @@ public class LogcatService implements Runnable {
         thread = new Thread(this);
         thread.setName("logcat");
         thread.setUncaughtExceptionHandler((t, e) -> {
-            Log.e(TAG, "Crash unexpectedly: ", e);
+            //Log.e(TAG, "Crash unexpectedly: ", e);
             thread = null;
             start();
         });
@@ -175,18 +175,18 @@ public class LogcatService implements Runnable {
     }
 
     public void startVerbose() {
-        Log.i(TAG, "!!start_verbose!!");
+        //Log.i(TAG, "!!start_verbose!!");
     }
 
     public void stopVerbose() {
-        Log.i(TAG, "!!stop_verbose!!");
+        //Log.i(TAG, "!!stop_verbose!!");
     }
 
     public void refresh(boolean isVerboseLog) {
         if (isVerboseLog) {
-            Log.i(TAG, "!!refresh_verbose!!");
+            //Log.i(TAG, "!!refresh_verbose!!");
         } else {
-            Log.i(TAG, "!!refresh_modules!!");
+            //Log.i(TAG, "!!refresh_modules!!");
         }
     }
 

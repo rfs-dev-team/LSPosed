@@ -94,7 +94,7 @@ public class LogsFragment extends BaseFragment implements MenuProvider {
                         var message = cause == null ? e.getMessage() : cause.getMessage();
                         var text = context.getString(R.string.logs_save_failed2, message);
                         showHint(text, false);
-                        Log.w(App.TAG, "save log", e);
+                        //Log.w(App.TAG, "save log", e);
                     }
                 });
             });

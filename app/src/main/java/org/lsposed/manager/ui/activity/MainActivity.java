@@ -262,7 +262,7 @@ public class MainActivity extends BaseActivity implements RepoLoader.RepoListene
         }
         if (App.isParasitic) {
             var updateShortcut = ShortcutUtil.updateShortcut();
-            Log.d(App.TAG, "update shortcut success = " + updateShortcut);
+            //Log.d(App.TAG, "update shortcut success = " + updateShortcut);
         }
     }
 

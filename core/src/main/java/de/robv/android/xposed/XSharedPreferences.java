@@ -179,7 +179,7 @@ public final class XSharedPreferences implements SharedPreferences {
                     xposedsharedprefs = metaData.containsKey("xposedsharedprefs");
                 }
             } catch (NumberFormatException | IOException e) {
-                Log.w(TAG, "Apk parser fails: " + e);
+                //Log.w(TAG, "Apk parser fails: " + e);
             }
             newModule = isModule && (xposedminversion > 92 || xposedsharedprefs);
         }
@@ -215,7 +215,7 @@ public final class XSharedPreferences implements SharedPreferences {
             } catch (AccessDeniedException accDeniedEx) {
                 if (BuildConfig.DEBUG) Log.e(TAG, "tryRegisterWatcher: access denied to " + path);
             } catch (Exception e) {
-                Log.e(TAG, "tryRegisterWatcher: failed to register file watcher", e);
+                //Log.e(TAG, "tryRegisterWatcher: failed to register file watcher", e);
             }
         }
     }
@@ -343,11 +343,11 @@ public final class XSharedPreferences implements SharedPreferences {
                 map = mMap;
             }
         } catch (XmlPullParserException e) {
-            Log.w(TAG, "getSharedPreferences failed for: " + mFilename, e);
+            //Log.w(TAG, "getSharedPreferences failed for: " + mFilename, e);
         } catch (FileNotFoundException ignored) {
             // SharedPreferencesImpl has a canRead() check, so it doesn't log anything in case the file doesn't exist
         } catch (IOException e) {
-            Log.w(TAG, "getSharedPreferences failed for: " + mFilename, e);
+            //Log.w(TAG, "getSharedPreferences failed for: " + mFilename, e);
         } finally {
             if (result != null && result.stream != null) {
                 try {
@@ -394,7 +394,7 @@ public final class XSharedPreferences implements SharedPreferences {
             // SharedPreferencesImpl doesn't log anything in case the file doesn't exist
             return true;
         } catch (IOException e) {
-            Log.w(TAG, "hasFileChanged", e);
+            //Log.w(TAG, "hasFileChanged", e);
             return true;
         }
     }

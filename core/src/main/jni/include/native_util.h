@@ -43,7 +43,7 @@ inline bool RegisterNativeMethodsInternal(JNIEnv *env,
 
     auto clazz = Context::GetInstance()->FindClassFromCurrentLoader(env, class_name.data());
     if (clazz.get() == nullptr) {
-        LOGF("Couldn't find class: {}", class_name.data());
+        //LOGF("Couldn't find class: {}", class_name.data());
         return false;
     }
     return JNI_RegisterNatives(env, clazz, methods, method_count);
