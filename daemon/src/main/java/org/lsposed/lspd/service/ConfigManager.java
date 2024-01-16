@@ -729,10 +729,10 @@ public class ConfigManager {
             }
         }
         //Log.d(TAG, "cached scope");
-        cachedScope.forEach((ps, modules) -> {
+        //cachedScope.forEach((ps, modules) -> {
             //Log.d(TAG, ps.processName + "/" + ps.uid);
-            modules.forEach(module -> Log.d(TAG, "\t" + module.packageName));
-        });
+            //modules.forEach(module -> Log.d(TAG, "\t" + module.packageName));
+        //});
     }
 
     // This is called when a new process created, use the cached result

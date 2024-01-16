@@ -305,7 +305,7 @@ public class LSPosedContext implements XposedInterface {
             try {
                 return new LSPosedRemotePreferences(service, n);
             } catch (RemoteException e) {
-                log("Failed to get remote preferences", e);
+                //log("Failed to get remote preferences", e);
                 throw new XposedFrameworkError(e);
             }
         });
@@ -317,7 +317,7 @@ public class LSPosedContext implements XposedInterface {
         try {
             return service.getRemoteFileList();
         } catch (RemoteException e) {
-            log("Failed to list remote files", e);
+            //log("Failed to list remote files", e);
             throw new XposedFrameworkError(e);
         }
     }
