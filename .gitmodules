@@ -1,6 +1,7 @@
 [submodule "external/lsplant"]
 	path = external/lsplant
-	url = https://github.com/LSPosed/LSPlant.git
+	url = https://github.com/pumPCin/LSPlant.git
+	branch = master
 [submodule "external/dobby"]
 	path = external/dobby
 	url = https://github.com/LSPosed/Dobby.git
