@@ -4,7 +4,8 @@
 	branch = master
 [submodule "external/dobby"]
 	path = external/dobby
-	url = https://github.com/LSPosed/Dobby.git
+	url = https://github.com/pumPCin/Dobby.git
+	branch = master
 [submodule "external/fmt"]
 	path = external/fmt
 	url = https://github.com/pumPCin/fmt.git
