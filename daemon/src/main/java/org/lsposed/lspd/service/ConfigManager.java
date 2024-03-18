@@ -94,7 +94,7 @@ public class ConfigManager {
 
     private final SQLiteDatabase db = openDb();
 
-    private boolean verboseLog = true;
+    private boolean verboseLog = false; //true;
     private boolean dexObfuscate = true;
     private boolean enableStatusNotification = true;
     private Path miscPath = null;
@@ -140,7 +140,7 @@ public class ConfigManager {
             "module_pkg_name text NOT NULL UNIQUE," +
             "apk_path text NOT NULL, " +
             "enabled BOOLEAN DEFAULT 0 " +
-            "CHECK (enabled IN (0, 1))" +
+            "CHECK (enabled IN (0, 1)) " +
             ");");
     private final SQLiteStatement createScopeTable = db.compileStatement("CREATE TABLE IF NOT EXISTS scope (" +
             "mid integer," +

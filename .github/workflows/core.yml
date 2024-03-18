@@ -2,11 +2,6 @@ name: Core
 
 on:
   workflow_dispatch:
-    inputs:
-      post_telegram:
-        description: 'Post to Telegram'
-        required: false
-        type: boolean
   push:
     branches: [ master ]
     tags: [ v* ]
@@ -137,21 +132,3 @@ jobs:
         with:
           name: symbols
           path: build/symbols
-
-      - name: Post to channel
-        if: ${{ success() && github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.ref_type != 'tag' && inputs.post_telegram != 'false' }}
-        env:
-          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-          DISCUSSION_ID: ${{ secrets.DISCUSSION_ID }}
-          TOPIC_ID: ${{ secrets.TOPIC_ID }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          COMMIT_URL: ${{ github.event.head_commit.url }}
-        run: |
-          if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
-            OUTPUT="magisk-loader/release/"
-            export riruRelease=$(find $OUTPUT -name "LSPosed-v*-riru-release.zip")
-            export riruDebug=$(find $OUTPUT -name "LSPosed-v*-riru-debug.zip")
-            export zygiskRelease=$(find $OUTPUT -name "LSPosed-v*-zygisk-release.zip")
-            export zygiskDebug=$(find $OUTPUT -name "LSPosed-v*-zygisk-debug.zip")
-          fi
