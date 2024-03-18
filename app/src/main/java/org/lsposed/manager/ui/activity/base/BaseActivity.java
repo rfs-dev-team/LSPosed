@@ -74,7 +74,7 @@ public class BaseActivity extends MaterialActivity {
     //protected void onStop() {
         //super.onStop();
         //Telemetry.trackEvent("BaseActivity stop", null);
-    }
+    //}
 
     @Override
     public void onApplyUserThemeResource(@NonNull Resources.Theme theme, boolean isDecorView) {
