@@ -43,7 +43,7 @@ inline bool RegisterNativeMethodsInternal(JNIEnv *env,
 
     auto clazz = Context::GetInstance()->FindClassFromCurrentLoader(env, class_name.data());
     if (clazz.get() == nullptr) {
-        LOGF("Couldn't find class: {}", class_name.data());
+        //LOGF("Couldn't find class: {}", class_name.data());
         return false;
     }
     return JNI_RegisterNatives(env, clazz, methods, method_count);
@@ -76,24 +76,24 @@ inline bool RegisterNativeMethodsInternal(JNIEnv *env,
   RegisterNativeMethodsInternal(env, GetNativeBridgeSignature() + #class_name, gMethods, arraysize(gMethods))
 
 inline int HookFunction(void *original, void *replace, void **backup) {
-    if constexpr (isDebug) {
-        Dl_info info;
-        if (dladdr(original, &info))
-        LOGD("Hooking {} ({}) from {} ({})",
-             info.dli_sname ? info.dli_sname : "(unknown symbol)", info.dli_saddr,
-             info.dli_fname ? info.dli_fname : "(unknown file)", info.dli_fbase);
-    }
+    //if constexpr (isDebug) {
+        //Dl_info info;
+        //if (dladdr(original, &info))
+        //LOGD("Hooking {} ({}) from {} ({})",
+             //info.dli_sname ? info.dli_sname : "(unknown symbol)", info.dli_saddr,
+             //info.dli_fname ? info.dli_fname : "(unknown file)", info.dli_fbase);
+    //}
     return DobbyHook(original, reinterpret_cast<dobby_dummy_func_t>(replace), reinterpret_cast<dobby_dummy_func_t *>(backup));
 }
 
 inline int UnhookFunction(void *original) {
-    if constexpr (isDebug) {
-        Dl_info info;
-        if (dladdr(original, &info))
-        LOGD("Unhooking {} ({}) from {} ({})",
-             info.dli_sname ? info.dli_sname : "(unknown symbol)", info.dli_saddr,
-             info.dli_fname ? info.dli_fname : "(unknown file)", info.dli_fbase);
-    }
+    //if constexpr (isDebug) {
+        //Dl_info info;
+        //if (dladdr(original, &info))
+        //LOGD("Unhooking {} ({}) from {} ({})",
+             //info.dli_sname ? info.dli_sname : "(unknown symbol)", info.dli_saddr,
+             //info.dli_fname ? info.dli_fname : "(unknown file)", info.dli_fbase);
+    //}
     return DobbyDestroy(original);
 }
 

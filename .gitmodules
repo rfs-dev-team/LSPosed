@@ -1,12 +1,16 @@
 [submodule "external/lsplant"]
 	path = external/lsplant
-	url = https://github.com/LSPosed/LSPlant.git
+	url = https://github.com/pumPCin/LSPlant.git
+	branch = master
 [submodule "external/dobby"]
 	path = external/dobby
-	url = https://github.com/LSPosed/Dobby.git
+	url = https://github.com/pumPCin/Dobby.git
+	branch = master
 [submodule "external/fmt"]
 	path = external/fmt
-	url = https://github.com/fmtlib/fmt.git
+	url = https://github.com/pumPCin/fmt.git
+	branch = master
 [submodule "external/cxx"]
 	path = external/cxx
-	url = https://github.com/topjohnwu/libcxx.git
+	url = https://github.com/pumPCin/libcxx.git
+	branch = master

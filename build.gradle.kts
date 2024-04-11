@@ -57,8 +57,8 @@ cmaker {
 }
 
 val repo = jgit.repo()
-val commitCount = (repo?.commitCount("refs/remotes/origin/master") ?: 1) + 4200
-val latestTag = repo?.latestTag?.removePrefix("v") ?: "1.0"
+val commitCount = (repo?.commitCount("refs/remotes/origin/master") ?: 1) + 4300
+val latestTag = "1.9.3"
 
 val injectedPackageName by extra("com.android.shell")
 val injectedPackageUid by extra(2000)
@@ -70,7 +70,7 @@ val androidTargetSdkVersion by extra(34)
 val androidMinSdkVersion by extra(27)
 val androidBuildToolsVersion by extra("34.0.0")
 val androidCompileSdkVersion by extra(34)
-val androidCompileNdkVersion by extra("26.1.10909125")
+val androidCompileNdkVersion by extra("26.2.11394342")
 val androidSourceCompatibility by extra(JavaVersion.VERSION_17)
 val androidTargetCompatibility by extra(JavaVersion.VERSION_17)
 

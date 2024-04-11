@@ -50,7 +50,7 @@ import org.lsposed.manager.ui.dialog.BlurBehindDialogBuilder;
 import org.lsposed.manager.ui.dialog.FlashDialogBuilder;
 import org.lsposed.manager.ui.dialog.WelcomeDialog;
 import org.lsposed.manager.util.NavUtil;
-import org.lsposed.manager.util.Telemetry;
+//import org.lsposed.manager.util.Telemetry;
 import org.lsposed.manager.util.UpdateUtil;
 import org.lsposed.manager.util.chrome.LinkTransformationMethod;
 
@@ -80,7 +80,7 @@ public class HomeFragment extends BaseFragment implements MenuProvider {
             return true;
         });
         menu.findItem(R.id.menu_issue).setOnMenuItemClickListener(v -> {
-            NavUtil.startURL(requireActivity(), "https://github.com/LSPosed/LSPosed/issues/new/choose");
+            NavUtil.startURL(requireActivity(), "https://github.com/pumPCin/LSPosed/issues/new/choose");
             return true;
         });
     }
@@ -246,7 +246,7 @@ public class HomeFragment extends BaseFragment implements MenuProvider {
         map.put("api", binding.api.getText().toString());
         map.put("frameworkVersion", binding.frameworkVersion.getText().toString());
         map.put("systemAbi", Arrays.toString(Build.SUPPORTED_ABIS));
-        Telemetry.trackEvent("HomeFragment", map);
+        //Telemetry.trackEvent("HomeFragment", map);
         binding.copyInfo.setOnClickListener(v -> {
             ClipboardUtils.put(activity, info);
             showHint(R.string.info_copied, false);
@@ -298,8 +298,8 @@ public class HomeFragment extends BaseFragment implements MenuProvider {
             binding.designAboutInfo.setTransformationMethod(new LinkTransformationMethod(requireActivity()));
             binding.designAboutInfo.setText(HtmlCompat.fromHtml(getString(
                     R.string.about_view_source_code,
-                    "<b><a href=\"https://github.com/LSPosed/LSPosed\">GitHub</a></b>",
-                    "<b><a href=\"https://t.me/LSPosed\">Telegram</a></b>"), HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    "<b><a href=\"https://github.com/pumPCin/LSPosed\">GitHub</a></b>",
+                    "<b></b>"), HtmlCompat.FROM_HTML_MODE_LEGACY));
             binding.designAboutVersion.setText(String.format(LocaleDelegate.getDefaultLocale(), "%s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
             return new BlurBehindDialogBuilder(requireContext())
                     .setView(binding.getRoot()).create();

@@ -365,7 +365,7 @@ public final class XposedHelpers {
      *   &#64;Override
      *   protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
      *     String oldText = (String) param.args[0];
-     *     Log.d("MyModule", oldText);
+     *     //Log.d("MyModule", oldText);
      *
      *     param.args[0] = "test";
      *     param.args[1] = 42; // auto-boxing is working here
